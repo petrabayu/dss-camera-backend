@@ -27,6 +27,14 @@ const createNewCamera = async (body) => {
     }
   }
 
+  let shutterSpeedMin = body.min_shutter_speed;
+  if (typeof shutterSpeedMin === "string" && shutterSpeedMin.includes("/")) {
+    const parts = shutterSpeedMin.split("/");
+    if (parts.length === 2 && parts[0] === "1") {
+      shutterSpeedMin = 1 / parseFloat(parts[1]);
+    }
+  }
+
   const SQLQuery = `
       INSERT INTO cameras
       (camera_name, price, pixel, max_resolution_width, max_resolution_length, sensor_size, min_iso, max_iso, min_shutter_speed, max_shutter_speed, continues_drive, max_video_resolution_width, max_video_resolution_length, max_video_fps, battery_life, articulated_lcd, screen_dots, weight, user_id) 
@@ -42,7 +50,7 @@ const createNewCamera = async (body) => {
     body.sensor_size,
     body.min_iso,
     body.max_iso,
-    body.min_shutter_speed,
+    shutterSpeedMin,
     shutterSpeedMax,
     body.continues_drive,
     body.max_video_resolution_width,
@@ -117,11 +125,10 @@ const updateCamera = async (id, updateQuery) => {
   `;
 
   const [result] = await dbPool.execute(SQLQuery, values);
-
+  
   if (result.affectedRows === 0) {
     throw new Error(`Camera with id ${id} not found.`);
   }
-
   return result;
 };
 

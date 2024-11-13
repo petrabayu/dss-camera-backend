@@ -1,8 +1,11 @@
 require("dotenv").config();
 
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
+app.use(cors());
+
 const port = process.env.PORT || 4000;
 app.use(express.json()); // mengizinkan request menerima format JSON
 
@@ -19,18 +22,16 @@ const { TOPSISCalculation } = require("./controller/topsisCalculation");
 
 app.use(middlewareLogRequest);
 
-
-
-app.use("/users", usersRoutes);
-app.use("/cameras", camaerasRoutes);
-app.use("/ahp-weights", weightRoutes);
-app.use("/topsis-scores", scoreRoutes);
-app.use("/calculations", calculationRoutes);
-app.use("/user-cameras", userCameraRoutes);
-app.use("/calculation-cameras", calculationCameraRoutes);
+app.use("/api/users", usersRoutes);
+app.use("/api/cameras", camaerasRoutes);
+app.use("/api/ahp-weights", weightRoutes);
+app.use("/api/topsis-scores", scoreRoutes);
+app.use("/api/calculations", calculationRoutes);
+app.use("/api/user-cameras", userCameraRoutes);
+app.use("/api/calculation-cameras", calculationCameraRoutes);
 
 //Proses Perhitungan AHP-TOPSIS
-app.post("/topsis-calculation", TOPSISCalculation);
+app.post("/api/topsis-calculation", TOPSISCalculation);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

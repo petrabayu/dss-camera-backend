@@ -91,9 +91,8 @@ const createNewCamera = async (req, res) => {
 
 const updateCamera = async (req, res) => {
   const { id } = req.params;
-
   try {
-    const result = await CameraModel.updateCamera(id);
+    const result = await CameraModel.updateCamera(id, req.updateQuery);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: `User with ID ${id} not found.` });
@@ -115,7 +114,7 @@ const deleteCamera = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const [result] = await CameraModel.deleteCamera(id);
+    const result = await CameraModel.deleteCamera(id);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ message: `Camera with ID ${id} not found.` });
