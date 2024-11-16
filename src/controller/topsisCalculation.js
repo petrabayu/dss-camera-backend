@@ -6,6 +6,7 @@ const ScoreModel = require("../models/ScoreModel");
 const TOPSISCalculation = async (req, res) => {
   try {
     const { alternativeId, ahpWeightId } = req.body;
+    console.log("Body Received for TOPSIS Calculation:", req.body);
 
     // Validasi input dari body
     if (!alternativeId || !Array.isArray(alternativeId) || alternativeId.length === 0) {

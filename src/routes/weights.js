@@ -7,10 +7,13 @@ const weightsController = require("../controller/weights");
 router.post("/", weightsController.createNewWeight);
 
 //READ
-router.get("/", weightsController.getAllWeights);
+router.get("/latest", weightsController.getLatestWeightId);
 
 //READ
 router.get("/:id", weightsController.getWeightById);
+
+//READ
+router.get("/", weightsController.getAllWeights);
 
 //DELETE
 router.delete("/:id", weightsController.deleteWeight);

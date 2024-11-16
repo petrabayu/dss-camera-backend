@@ -13,6 +13,22 @@ const getWeight = async (id) => {
   return rows;
 };
 
+const getLatestWeightId = async () => {
+  const SQLQuery = `
+    SELECT id
+    FROM ahp_criteria_weights
+    ORDER BY id DESC
+    LIMIT 1`; // Mengambil data terbaru berdasarkan ID terbesar
+
+  try {
+    const [rows] = await dbPool.execute(SQLQuery); // Jalankan query
+    return rows[0]?.id || null; // Ambil hasil pertama
+  } catch (error) {
+    console.error("Error fetching latest AHP weights:", error);
+    throw error; // Lempar error agar bisa ditangani di controller
+  }
+};
+
 const createNewWeight = async (body) => {
   const SQLQuery = `
     INSERT INTO ahp_criteria_weights 
@@ -50,6 +66,7 @@ const deleteWeight = async (id) => {
 module.exports = {
   getAllWeights,
   getWeight,
+  getLatestWeightId,
   createNewWeight,
   deleteWeight,
 };

@@ -45,6 +45,29 @@ const getWeightById = async (req, res) => {
   }
 };
 
+const getLatestWeightId = async (req, res) => {
+  try {
+    const latestWeightId = await WeightModel.getLatestWeightId(); // Panggil fungsi dari model
+
+    if (!latestWeightId) {
+      return res.status(404).json({
+        message: "No AHP weights found",
+      });
+    }
+
+    res.status(200).json({
+      message: "Fetch latest AHP weight success",
+      data: latestWeightId,
+    });
+  } catch (error) {
+    console.error("Error fetching latest AHP weight:", error.message);
+    res.status(500).json({
+      message: "Internal Server Error. Please try again later.",
+      serverMessage: error.message,
+    });
+  }
+};
+
 const createNewWeight = async (req, res) => {
   const { body } = req;
 
@@ -88,6 +111,7 @@ const deleteWeight = async (req, res) => {
 module.exports = {
   getAllWeights,
   getWeightById,
+  getLatestWeightId,
   createNewWeight,
   deleteWeight,
 };

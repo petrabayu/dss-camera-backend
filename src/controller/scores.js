@@ -44,6 +44,22 @@ const getScoreById = async (req, res) => {
   }
 };
 
+const getRankingWithCameraNames = async (req, res) => {
+  try {
+    const rankingResults = await ScoreModel.getRankingWithCameraNames();
+    if (!rankingResults || rankingResults.length === 0) {
+      return res.status(404).json({ message: "No ranking results found." });
+    }
+    res.status(200).json(rankingResults);
+  } catch (error) {
+    console.error("Error fetching ranking results:", error.message);
+    res.status(500).json({
+      message: "Internal Server Error. Please try again later.",
+      serverMessage: error.message,
+    });
+  }
+};
+
 const createNewScore = async (req, res) => {
   const { body } = req;
 
@@ -86,6 +102,7 @@ const deleteScore = async (req, res) => {
 module.exports = {
   getAllScores,
   getScoreById,
+  getRankingWithCameraNames,
   createNewScore,
   deleteScore,
 };

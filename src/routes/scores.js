@@ -10,6 +10,9 @@ router.post("/", scoreController.createNewScore);
 router.get("/", scoreController.getAllScores);
 
 //READ
+router.get("/ranking", scoreController.getRankingWithCameraNames);
+
+//READ
 router.get("/:id", scoreController.getScoreById);
 
 //DELETE
