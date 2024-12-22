@@ -241,13 +241,13 @@ const TOPSISServices = {
     return sqrtRowSums; // Kembalikan array hasil penjumlahan baris
   },
 
-  idealSolutionCalculation: (positiveIdealSolution, negativeIdealSolution) => {
-    const idealSolutionRanking = [];
+  closenessCoeficientCalculation: (positiveIdealSolution, negativeIdealSolution) => {
+    const alternativeRanking = [];
     for (let i = 0; i < negativeIdealSolution.length; i++) {
-      const idealSolution = negativeIdealSolution[i] / (positiveIdealSolution[i] + negativeIdealSolution[i]);
-      idealSolutionRanking.push(idealSolution);
+      const closenessCoeficient = negativeIdealSolution[i] / (positiveIdealSolution[i] + negativeIdealSolution[i]);
+      alternativeRanking.push(closenessCoeficient);
     }
-    return idealSolutionRanking;
+    return alternativeRanking;
   },
 };
 
