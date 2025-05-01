@@ -244,7 +244,8 @@ const TOPSISServices = {
   closenessCoeficientCalculation: (positiveIdealSolution, negativeIdealSolution) => {
     const alternativeRanking = [];
     for (let i = 0; i < negativeIdealSolution.length; i++) {
-      const closenessCoeficient = negativeIdealSolution[i] / (positiveIdealSolution[i] + negativeIdealSolution[i]);
+      const closenessCoeficient =
+        negativeIdealSolution[i] / (positiveIdealSolution[i] + negativeIdealSolution[i]);
       alternativeRanking.push(closenessCoeficient);
     }
     return alternativeRanking;
@@ -252,93 +253,3 @@ const TOPSISServices = {
 };
 
 module.exports = { AHPServices, TOPSISServices };
-
-//   const nilaiIRSaaty = {
-//     1: 0.0,
-//     2: 0.0,
-//     3: 0.58,
-//     4: 0.9,
-//     5: 1.12,
-//     6: 1.24,
-//     7: 1.32,
-//     8: 1.41,
-//     9: 1.45,
-//     10: 1.49,
-//     11: 1.51,
-//     12: 1.48,
-//     13: 1.56,
-//     14: 1.57,
-//     15: 1.59,
-//   };
-
-//   const matriksNormalisasi = [
-//     [1, 3, 1 / 5],
-//     [1 / 3, 1, 1 / 7],
-//     [5, 7, 1],
-//   ];
-
-//   const hasilNormalisasi = normalisasiMatriks(matriksNormalisasi);
-//   console.log("Matriks Normalisasi:", hasilNormalisasi);
-
-//   const bobotRelatif = averagePerBaris(hasilNormalisasi);
-//   console.log("Bobot/Prioritas Relatif:", bobotRelatif);
-
-//   const konsistensi = checkConsistency(matriksNormalisasi, bobotRelatif); //ini matriks pada tahap check consistency
-//   console.log("Tabel Konsistensi", konsistensi);
-
-//   const sumBarisKonsistensi = sumMatrixConsistency(konsistensi);
-//   console.log("Hasil Penjumlahan Tiap Baris Tabel Konsistensi:", sumBarisKonsistensi);
-
-//   const nilaiLambdaMax = lambdaMaxCalculation(sumBarisKonsistensi, bobotRelatif);
-//   console.log("nilai Lambda Max:", nilaiLambdaMax);
-
-//   const validasiMatriksPerbandingan = cicrCalculation(nilaiLambdaMax, matriksNormalisasi, nilaiIRSaaty);
-//   console.log(validasiMatriksPerbandingan);
-
-//TOPSIS
-
-// const matriksAlternatif = [
-//   [23968000, 26, 25560576, 3, 100, 32000, 30, 1 / 4000, 11, 8294400, 120, 570, 3, 1036800, 493],
-//   [9600000, 24, 24000000, 3, 100, 12800, 1, 1 / 4000, 6.5, 8294400, 120, 340, 1, 1040000, 356],
-//   [12800000, 24, 24000000, 3, 100, 32000, 30, 1 / 4000, 12, 8294400, 120, 420, 3, 1620000, 375],
-//   [11984000, 20, 20155392, 2, 200, 25600, 60, 1 / 500, 10, 7372800, 120, 270, 3, 1840000, 352],
-//   [15984000, 21, 20668416, 3, 100, 51200, 30, 1 / 4000, 11, 8294400, 120, 320, 2, 1040000, 450],
-// ];
-
-// const nilaiBobot = [
-//   0.0451, 0.0442, 0.0191, 0.1656, 0.2129, 0.1359, 0.0726, 0.0412, 0.0218, 0.0709, 0.0236, 0.0805, 0.0413, 0.0169,
-//   0.0083,
-// ];
-
-//   const squareRootResults = squareRootCalculation(matriksAlternatif);
-//   // console.log("Hasil Penjumlahan Tiap Kolom Matriks Berpasangan:", squareRootResults);
-
-//   const normalizationMatrix = normalizationCalculation(matriksAlternatif, squareRootResults);
-//   // console.log("Tabel Normalisasi Alternatif:", normalizationMatrix);
-
-//   const normalizationWithWeightMatrix = normalizationWithWeightCalculation(normalizationMatrix, nilaiBobot);
-//   // console.log("Tabel Normalisasi Alternatif * Bobot:", normalizationWithWeightMatrix);
-
-//   const transposeArray = transposeArrayCalculation(normalizationWithWeightMatrix);
-//   // console.log("Transpose Array Normalisasi * Bobot:", transposeArray);
-
-//   const solusiIdealPositif = positifIdealSolutionCalculation(transposeArray);
-//   // console.log("Vektor Solusi Ideal Positif:", solusiIdealPositif);
-
-//   const solusiIdealNegatif = negativeIdealSolutionCalculation(transposeArray);
-//   // console.log("Vektor Solusi Ideal Negatif:", solusiIdealNegatif);
-
-//   const jarakKedekatanPositif = jarakKedekatanPositifCalculation(normalizationWithWeightMatrix, solusiIdealPositif);
-//   // console.log("Matriks Perhitungan Jarak Kedekatan SIP:", jarakKedekatanPositif);
-
-//   const jarakKedekatanNegatif = jarakKedekatanNegatifCalculation(normalizationWithWeightMatrix, solusiIdealNegatif);
-//   // console.log("Matriks Perhitungan Jarak Kedekatan SIN:", jarakKedekatanNegatif);
-
-//   const jumlahBarisJarakPositif = relativeClosenessSumRowsCalculation(jarakKedekatanPositif);
-//   console.log("Jarak Kedekatan Solusi Ideal Positif", jumlahBarisJarakPositif);
-
-//   const jumlahBarisJarakNegatif = relativeClosenessSumRowsCalculation(jarakKedekatanNegatif);
-//   console.log("Jarak Kedekatan Solusi Ideal Negatif", jumlahBarisJarakNegatif);
-
-//   const solusiIdeal = idealSolutionCalculation(jumlahBarisJarakPositif, jumlahBarisJarakNegatif);
-//   console.log("Nilai solusi ideal:", solusiIdeal);

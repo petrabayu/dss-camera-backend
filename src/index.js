@@ -6,7 +6,7 @@ const cors = require("cors");
 const app = express();
 app.use(cors());
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.use(express.json()); // mengizinkan request menerima format JSON
 
 const usersRoutes = require("./routes/users");
@@ -17,10 +17,7 @@ const calculationRoutes = require("./routes/calculations");
 const userCameraRoutes = require("./routes/userCameras");
 const calculationCameraRoutes = require("./routes/calculationCameras");
 
-const middlewareLogRequest = require("./middleware/logs");
 const { TOPSISCalculation } = require("./controller/topsisCalculation");
-
-app.use(middlewareLogRequest);
 
 app.use("/api/users", usersRoutes);
 app.use("/api/cameras", camaerasRoutes);

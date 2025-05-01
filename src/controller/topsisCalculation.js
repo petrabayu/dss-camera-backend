@@ -6,11 +6,12 @@ const ScoreModel = require("../models/ScoreModel");
 const TOPSISCalculation = async (req, res) => {
   try {
     const { alternativeId, ahpWeightId } = req.body;
-    // console.log("Body Received for TOPSIS Calculation:", req.body);
 
     // Validasi input dari body
     if (!alternativeId || !Array.isArray(alternativeId) || alternativeId.length === 0) {
-      return res.status(400).json({ message: "Invalid input. 'alternativeId' must be a non-empty array." });
+      return res
+        .status(400)
+        .json({ message: "Invalid input. 'alternativeId' must be a non-empty array." });
     }
 
     if (!ahpWeightId) {
@@ -18,7 +19,6 @@ const TOPSISCalculation = async (req, res) => {
     }
 
     const alternativeMatrix = await CameraModel.getSelectedCameras(alternativeId);
-    // console.log("Alternatif Kamera", alternativeMatrix);
 
     if (!alternativeMatrix || alternativeMatrix.length === 0) {
       return res.status(404).json({ message: "No alternative data found for the provided IDs." });
@@ -47,7 +47,7 @@ const TOPSISCalculation = async (req, res) => {
     console.log("");
 
     const [AHPweightsDatabase] = await WeightModel.getWeight(ahpWeightId);
-    // console.log("Nilai bobot dari database (AHPweightsDatabase):", AHPweightsDatabase);
+
     if (!AHPweightsDatabase) {
       return res.status(404).json({ message: `AHP weights with ID ${ahpWeightId} not found.` });
     }
@@ -79,7 +79,9 @@ const TOPSISCalculation = async (req, res) => {
     }
 
     if (transformedMatrix.length === 0 || !AHPweights || AHPweights.length === 0) {
-      return res.status(400).json({ message: "Alternative data or AHP weights were not found or are empty." });
+      return res
+        .status(400)
+        .json({ message: "Alternative data or AHP weights were not found or are empty." });
     }
 
     try {
@@ -88,7 +90,10 @@ const TOPSISCalculation = async (req, res) => {
       console.log("----------------------------------------------------");
       console.log("");
 
-      const normalizationMatrix = TOPSISServices.normalizeMatrix(transformedMatrix, squareRootResults);
+      const normalizationMatrix = TOPSISServices.normalizeMatrix(
+        transformedMatrix,
+        squareRootResults
+      );
       console.log("Tabel Normalisasi Alternatif:", normalizationMatrix);
       console.log("----------------------------------------------------");
       console.log("");
@@ -101,8 +106,9 @@ const TOPSISCalculation = async (req, res) => {
       console.log("----------------------------------------------------");
       console.log("");
 
-      const transposeArray = TOPSISServices.transposeArrayCalculation(normalizationWithWeightMatrix);
-      // console.log("Transpose Array Normalisasi * Bobot:", transposeArray);
+      const transposeArray = TOPSISServices.transposeArrayCalculation(
+        normalizationWithWeightMatrix
+      );
 
       const positifIdealSolution = TOPSISServices.positifIdealSolutionCalculation(transposeArray);
       console.log("Vektor Solusi Ideal Positif:", positifIdealSolution);
@@ -130,12 +136,14 @@ const TOPSISCalculation = async (req, res) => {
       console.log("----------------------------------------------------");
       console.log("");
 
-      const positveClosenessSumRow = TOPSISServices.relativeClosenessSumRowsCalculation(positiveCloseness);
+      const positveClosenessSumRow =
+        TOPSISServices.relativeClosenessSumRowsCalculation(positiveCloseness);
       console.log("Jarak Kedekatan Solusi Ideal Positif", positveClosenessSumRow);
       console.log("----------------------------------------------------");
       console.log("");
 
-      const negativeClosenessSumRows = TOPSISServices.relativeClosenessSumRowsCalculation(negativeCloseness);
+      const negativeClosenessSumRows =
+        TOPSISServices.relativeClosenessSumRowsCalculation(negativeCloseness);
       console.log("Jarak Kedekatan Solusi Ideal Negatif", negativeClosenessSumRows);
       console.log("----------------------------------------------------");
       console.log("");
