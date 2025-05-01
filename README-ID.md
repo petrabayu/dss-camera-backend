@@ -26,8 +26,6 @@ Dataset yang digunakan dapat diunduh di sini: [Digital Camera Specifications Dat
 
 ## **API Endpoint**
 
-<br>
-
 ### **Kamera Endpoint**
 
 | Method | Endpoint                | Deskripsi                             |
@@ -38,9 +36,6 @@ Dataset yang digunakan dapat diunduh di sini: [Digital Camera Specifications Dat
 | POST   | `/api/cameras/selected` | Mendapatkan data kamera yang terpilih |
 | PUT    | `/api/cameras/:id`      | Merubah data kamera berdasarkan id    |
 | DELETE | `/api/cameras/:id`      | Menghapus data kamera berdasarkan id  |
-|        |                         |
-
-<br>
 
 ### **Bobot AHP Endpoint**
 
@@ -49,9 +44,6 @@ Dataset yang digunakan dapat diunduh di sini: [Digital Camera Specifications Dat
 | POST   | `/api/ahp-weights/`       | Membuat nilai bobot AHP baru               |
 | GET    | `/api/ahp-weights/latest` | Mendapatkan nilai bobot AHP terbaru        |
 | GET    | `/api/ahp-weights/:id`    | Mendapatkan nilai bobot AHP berdasarkan id |
-|        |                           |
-
-<br>
 
 ### **Perhitungan TOPSIS Endpoint**
 
@@ -60,7 +52,6 @@ Dataset yang digunakan dapat diunduh di sini: [Digital Camera Specifications Dat
 | POST   | `/api/topsis-scores/`        | Membuat nilai TOPSIS baru                           |
 | GET    | `/api/topsis-scores/ranking` | Mendapatkan data rangking terbaru pada nilai TOPSIS |
 | POST   | `/api/topsis-calculation/`   | Melakukan perhitungan TOPSIS                        |
-|        |                              |
 
 ## **Instalasi**
 

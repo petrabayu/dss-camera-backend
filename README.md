@@ -26,8 +26,6 @@ The dataset used can be downloaded here: [Digital Camera Specifications Dataset]
 
 ## **API Endpoint**
 
-</br>
-
 ### **Camera Endpoint**
 
 | Method | Endpoint                | Description              |
@@ -38,9 +36,6 @@ The dataset used can be downloaded here: [Digital Camera Specifications Dataset]
 | POST   | `/api/cameras/selected` | Get selected camera data |
 | PUT    | `/api/cameras/:id`      | Edit camera data by id   |
 | DELETE | `/api/cameras/:id`      | Delete camera data by id |
-|        |                         |
-
-</br>
 
 ### **AHP Weights Endpoint**
 
@@ -49,9 +44,6 @@ The dataset used can be downloaded here: [Digital Camera Specifications Dataset]
 | POST   | `/api/ahp-weights/`       | Create new AHP weights |
 | GET    | `/api/ahp-weights/latest` | Get latest AHP weights |
 | GET    | `/api/ahp-weights/:id`    | Get AHP weights by id  |
-|        |                           |
-
-</br>
 
 ### **TOPSIS Calculation Endpoint**
 
@@ -60,7 +52,6 @@ The dataset used can be downloaded here: [Digital Camera Specifications Dataset]
 | POST   | `/api/topsis-scores/`        | Create new TOPSIS scores                  |
 | GET    | `/api/topsis-scores/ranking` | Get latest ranking based on TOPSIS scores |
 | POST   | `/api/topsis-calculation/`   | Perform TOPSIS calculation                |
-|        |                              |
 
 ## **Installation**
 
